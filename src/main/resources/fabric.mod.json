@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "datatrades",
+  "version": "${version}",
+  "name": "DataTradeOffers",
+  "description": "Allows trades to be made using json in data packs!",
+  "authors": [
+    "gekocaretaker"
+  ],
+  "contact": {
+    "discord": "gekocaretaker"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/datatrades/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.gekocaretaker.datatrades.client.DatatradesClient"
+    ],
+    "main": [
+      "com.gekocaretaker.datatrades.DataTrades"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
