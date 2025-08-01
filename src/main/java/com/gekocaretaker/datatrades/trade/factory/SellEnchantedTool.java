@@ -26,9 +26,9 @@ public record SellEnchantedTool(ItemStack tool, int basePrice, int maxUses, int 
     public static final MapCodec<SellEnchantedTool> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 ItemStack.UNCOUNTED_CODEC.fieldOf("tool").forGetter(SellEnchantedTool::tool),
-                Codec.INT.fieldOf("base_price").forGetter(SellEnchantedTool::basePrice),
-                Codec.INT.fieldOf("max_uses").forGetter(SellEnchantedTool::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(SellEnchantedTool::experience),
+                Codec.INT.optionalFieldOf("base_price", 1).forGetter(SellEnchantedTool::basePrice),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(SellEnchantedTool::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellEnchantedTool::experience),
                 Codec.FLOAT.optionalFieldOf("multiplier", 0.05F).forGetter(SellEnchantedTool::multiplier),
                 Codec.INT.optionalFieldOf("level", 1).forGetter(SellEnchantedTool::level)
         ).apply(instance, SellEnchantedTool::new);

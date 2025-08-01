@@ -26,7 +26,7 @@ public record SellSuspiciousStew(RegistryEntry<StatusEffect> effect, int duratio
         return instance.group(
                 Registries.STATUS_EFFECT.getEntryCodec().fieldOf("effect").forGetter(SellSuspiciousStew::effect),
                 Codec.INT.fieldOf("duration").forGetter(SellSuspiciousStew::duration),
-                Codec.INT.fieldOf("experience").forGetter(SellSuspiciousStew::experience),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellSuspiciousStew::experience),
                 Codec.FLOAT.optionalFieldOf("multiplier", 0.05F).forGetter(SellSuspiciousStew::multiplier),
                 Codec.INT.optionalFieldOf("level", 1).forGetter(SellSuspiciousStew::level)
         ).apply(instance, SellSuspiciousStew::new);

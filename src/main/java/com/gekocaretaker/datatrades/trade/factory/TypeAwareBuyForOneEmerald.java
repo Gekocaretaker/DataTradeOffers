@@ -29,10 +29,10 @@ public record TypeAwareBuyForOneEmerald(Map<RegistryKey<VillagerType>, Item> map
     public static final MapCodec<TypeAwareBuyForOneEmerald> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 VILLAGER_TYPE_TO_ITEM_MAP_CODEC.fieldOf("items_by_type").forGetter(TypeAwareBuyForOneEmerald::map),
-                Codec.INT.fieldOf("count").forGetter(TypeAwareBuyForOneEmerald::count),
-                Codec.INT.fieldOf("max_uses").forGetter(TypeAwareBuyForOneEmerald::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(TypeAwareBuyForOneEmerald::experience),
-                Codec.INT.fieldOf("level").forGetter(TypeAwareBuyForOneEmerald::level)
+                Codec.INT.optionalFieldOf("count", 1).forGetter(TypeAwareBuyForOneEmerald::count),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(TypeAwareBuyForOneEmerald::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(TypeAwareBuyForOneEmerald::experience),
+                Codec.INT.optionalFieldOf("level", 1).forGetter(TypeAwareBuyForOneEmerald::level)
         ).apply(instance, TypeAwareBuyForOneEmerald::new);
     });
 

@@ -27,10 +27,10 @@ public record SellDyedArmor(Item sell, int price, int maxUses, int experience, i
     public static final MapCodec<SellDyedArmor> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 Registries.ITEM.getCodec().fieldOf("sell").forGetter(SellDyedArmor::sell),
-                Codec.INT.fieldOf("price").forGetter(SellDyedArmor::price),
-                Codec.INT.fieldOf("max_uses").forGetter(SellDyedArmor::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(SellDyedArmor::experience),
-                Codec.INT.fieldOf("level").forGetter(SellDyedArmor::level)
+                Codec.INT.optionalFieldOf("price", 1).forGetter(SellDyedArmor::price),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(SellDyedArmor::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellDyedArmor::experience),
+                Codec.INT.optionalFieldOf("level", 1).forGetter(SellDyedArmor::level)
         ).apply(instance, SellDyedArmor::new);
     });
 

@@ -29,14 +29,14 @@ public record SellPotionHoldingItem(Item sell, int sellCount, int price, int max
     public static final MapCodec<SellPotionHoldingItem> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 Registries.ITEM.getCodec().fieldOf("sell").forGetter(SellPotionHoldingItem::sell),
-                Codec.INT.fieldOf("sell_count").forGetter(SellPotionHoldingItem::sellCount),
-                Codec.INT.fieldOf("price").forGetter(SellPotionHoldingItem::price),
-                Codec.INT.fieldOf("map_uses").forGetter(SellPotionHoldingItem::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(SellPotionHoldingItem::experience),
+                Codec.INT.optionalFieldOf("sell_count", 1).forGetter(SellPotionHoldingItem::sellCount),
+                Codec.INT.optionalFieldOf("price", 1).forGetter(SellPotionHoldingItem::price),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(SellPotionHoldingItem::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellPotionHoldingItem::experience),
                 Registries.ITEM.getCodec().fieldOf("second_buy").forGetter(SellPotionHoldingItem::secondBuy),
-                Codec.INT.fieldOf("second_count").forGetter(SellPotionHoldingItem::secondCount),
-                Codec.FLOAT.fieldOf("multiplier").forGetter(SellPotionHoldingItem::multiplier),
-                Codec.INT.fieldOf("level").forGetter(SellPotionHoldingItem::level)
+                Codec.INT.optionalFieldOf("second_count", 1).forGetter(SellPotionHoldingItem::secondCount),
+                Codec.FLOAT.optionalFieldOf("multiplier", 0.05F).forGetter(SellPotionHoldingItem::multiplier),
+                Codec.INT.optionalFieldOf("level", 1).forGetter(SellPotionHoldingItem::level)
         ).apply(instance, SellPotionHoldingItem::new);
     });
 

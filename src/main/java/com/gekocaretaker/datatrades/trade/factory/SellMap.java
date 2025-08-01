@@ -31,13 +31,13 @@ import java.util.Optional;
 public record SellMap(int price, TagKey<Structure> structure, String nameKey, RegistryEntry<MapDecorationType> decoration, int maxUses, int experience, int level) implements TradeOfferFactory {
     public static final MapCodec<SellMap> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
-                Codec.INT.fieldOf("price").forGetter(SellMap::price),
+                Codec.INT.optionalFieldOf("price", 1).forGetter(SellMap::price),
                 TagKey.codec(RegistryKeys.STRUCTURE).fieldOf("structure").forGetter(SellMap::structure),
                 Codec.STRING.fieldOf("name_key").forGetter(SellMap::nameKey),
                 MapDecorationType.CODEC.fieldOf("decoration").forGetter(SellMap::decoration),
-                Codec.INT.fieldOf("max_uses").forGetter(SellMap::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(SellMap::experience),
-                Codec.INT.fieldOf("level").forGetter(SellMap::level)
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(SellMap::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellMap::experience),
+                Codec.INT.optionalFieldOf("level", 1).forGetter(SellMap::level)
         ).apply(instance, SellMap::new);
     });
 

@@ -28,7 +28,7 @@ public record EnchantBook(int experience, int minLevel, int maxLevel, TagKey<Enc
                           int level) implements TradeOfferFactory {
     public static final MapCodec<EnchantBook> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
-                Codec.INT.fieldOf("experience").forGetter(EnchantBook::experience),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(EnchantBook::experience),
                 Codec.INT.optionalFieldOf("min_enchant_level", 0).forGetter(EnchantBook::minLevel),
                 Codec.INT.optionalFieldOf("max_enchant_level", Integer.MAX_VALUE).forGetter(EnchantBook::maxLevel),
                 TagKey.codec(RegistryKeys.ENCHANTMENT).fieldOf("enchantments").forGetter(EnchantBook::possibleEnchantments),

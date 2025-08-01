@@ -26,13 +26,13 @@ public record ProcessItem(TradedItem toBeProcessed, int price, ItemStack process
     public static final MapCodec<ProcessItem> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 TradedItem.CODEC.fieldOf("to_be_processed").forGetter(ProcessItem::toBeProcessed),
-                Codec.INT.fieldOf("price").forGetter(ProcessItem::price),
+                Codec.INT.optionalFieldOf("price", 1).forGetter(ProcessItem::price),
                 ItemStack.CODEC.fieldOf("processed").forGetter(ProcessItem::processed),
-                Codec.INT.fieldOf("max_uses").forGetter(ProcessItem::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(ProcessItem::experience),
-                Codec.FLOAT.fieldOf("multiplier").forGetter(ProcessItem::multiplier),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(ProcessItem::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(ProcessItem::experience),
+                Codec.FLOAT.optionalFieldOf("multiplier", 0.05F).forGetter(ProcessItem::multiplier),
                 RegistryKey.createCodec(RegistryKeys.ENCHANTMENT_PROVIDER).optionalFieldOf("enchantment_provider").forGetter(ProcessItem::enchantmentProviderKey),
-                Codec.INT.fieldOf("level").forGetter(ProcessItem::level)
+                Codec.INT.optionalFieldOf("level", 1).forGetter(ProcessItem::level)
         ).apply(instance, ProcessItem::new);
     });
 

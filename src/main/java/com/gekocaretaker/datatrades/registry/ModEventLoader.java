@@ -65,6 +65,16 @@ public class ModEventLoader {
                     }
                 });
 
+                for (int i = 0; i < levels.size(); i++) {
+                    int finalI = i;
+                    professionManager.deny().forEach(tradeOfferFactoryRegistryKey -> {
+                        TradeOffers.Factory factory = tradeOfferFactories.get(tradeOfferFactoryRegistryKey);
+                        if (factory instanceof TradeOfferFactory tradeOfferFactory && finalI == tradeOfferFactory.level() - 1) {
+                            levels.get(finalI).remove(factory);
+                        }
+                    });
+                }
+
                 TradeOffers.PROFESSION_TO_LEVELED_TRADE.replace(professionManager.profession(), new Int2ObjectOpenHashMap<>(ImmutableMap.of(
                         1, levels.get(0).toArray(TradeOffers.Factory[]::new),
                         2, levels.get(1).toArray(TradeOffers.Factory[]::new),

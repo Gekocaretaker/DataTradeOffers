@@ -25,9 +25,9 @@ public record SellItem(ItemStack sell, int price, int maxUses, int experience, f
     public static final MapCodec<SellItem> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 ItemStack.CODEC.fieldOf("sell").forGetter(SellItem::sell),
-                Codec.INT.fieldOf("price").forGetter(SellItem::price),
+                Codec.INT.optionalFieldOf("price", 1).forGetter(SellItem::price),
                 Codec.INT.optionalFieldOf("max_uses", 12).forGetter(SellItem::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(SellItem::experience),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(SellItem::experience),
                 Codec.FLOAT.optionalFieldOf("multiplier", 0.05F).forGetter(SellItem::multiplier),
                 RegistryKey.createCodec(RegistryKeys.ENCHANTMENT_PROVIDER).optionalFieldOf("enchantment_provider").forGetter(SellItem::enchantmentProviderKey),
                 Codec.INT.optionalFieldOf("level", 1).forGetter(SellItem::level)

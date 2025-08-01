@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public record Empty(int level) implements TradeOfferFactory {
     public static final MapCodec<Empty> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
-                Codec.INT.optionalFieldOf("level", 0).forGetter(Empty::level)
+                Codec.INT.optionalFieldOf("level", 1).forGetter(Empty::level)
         ).apply(instance, Empty::new);
     });
 

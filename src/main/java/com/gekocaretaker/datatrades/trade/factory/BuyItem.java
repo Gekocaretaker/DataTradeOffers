@@ -19,9 +19,9 @@ public record BuyItem(ItemStack item, int count, int maxUses, int experience, in
     public static final MapCodec<BuyItem> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(
                 ItemStack.UNCOUNTED_CODEC.fieldOf("item").forGetter(BuyItem::item),
-                Codec.INT.fieldOf("count").forGetter(BuyItem::count),
-                Codec.INT.fieldOf("max_uses").forGetter(BuyItem::maxUses),
-                Codec.INT.fieldOf("experience").forGetter(BuyItem::experience),
+                Codec.INT.optionalFieldOf("count", 1).forGetter(BuyItem::count),
+                Codec.INT.optionalFieldOf("max_uses", 12).forGetter(BuyItem::maxUses),
+                Codec.INT.optionalFieldOf("experience", 1).forGetter(BuyItem::experience),
                 Codec.INT.optionalFieldOf("price", 1).forGetter(BuyItem::price),
                 Codec.INT.optionalFieldOf("level", 1).forGetter(BuyItem::level)
         ).apply(instance, BuyItem::new);
